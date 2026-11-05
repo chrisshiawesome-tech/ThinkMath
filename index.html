@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="A guided maths learning path for Australian students in Years 7–12, with curriculum maps, practice, flashcards, and clear explanations.">
+  <title>MathsPath — Learn maths step by step</title>
+  <style>
+    :root {
+      --ink: #17243b;
+      --muted: #66738a;
+      --blue: #4459dd;
+      --blue-dark: #3045c5;
+      --mint: #c8f0df;
+      --lime: #d7f477;
+      --peach: #ffe0ce;
+      --lilac: #e7e4ff;
+      --line: #e5eaf2;
+      --paper: #fff;
+      --canvas: #f5f7fb;
+      --shadow: 0 20px 55px rgba(33, 48, 84, .09);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1160px, calc(100% - 44px)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 850;
+      letter-spacing: -.04em;
+      font-size: 20px;
+    }
+
+    .brand-icon {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border-radius: 12px;
+      background: var(--blue);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover, .footer-links a:hover { color: var(--blue); }
+
+    .nav-cta, .primary-btn {
+      border: 0;
+      border-radius: 11px;
+      background: var(--blue);
+      color: white;
+      font-weight: 750;
+      text-decoration: none;
+      transition: .18s ease;
+    }
+
+    .nav-cta { padding: 11px 16px; font-size: 14px; }
+
+    .nav-cta:hover, .primary-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .hero { padding: 64px 0 34px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid #d8def9;
+      border-radius: 30px;
+      background: #eef0ff;
+      color: #3c4fcb;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5c70ed;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin: 20px 0 16px;
+      font-size: clamp(42px, 6.1vw, 72px);
+      line-height: .99;
+      letter-spacing: -.065em;
+    }
+
+    h1 span { color: var(--blue); }
+
+    .hero-copy {
+      max-width: 590px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn { display: inline-block; padding: 14px 20px; }
+
+    .text-btn {
+      padding: 12px 4px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .hero-note { margin-top: 17px; color: #8490a4; font-size: 12px; }
+
+    .hero-art {
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 24px;
+      background: #273984;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-art::before, .hero-art::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(1px);
+    }
+
+    .hero-art::before {
+      width: 260px;
+      height: 260px;
+      right: -30px;
+      top: -85px;
+      background: #6078ed;
+    }
+
+    .hero-art::after {
+      width: 190px;
+      height: 190px;
+      bottom: -74px;
+      left: -42px;
+      background: #35b38c;
+    }
+
+    .art-label {
+      position: relative;
+      z-index: 1;
+      color: #d8e0ff;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .math-card {
+      position: absolute;
+      z-index: 1;
+      left: 10%;
+      right: 10%;
+      top: 22%;
+      padding: 24px;
+      border: 1px solid #ffffff35;
+      border-radius: 19px;
+      background: #ffffffef;
+      box-shadow: 0 16px 40px #101a4533;
+      transform: rotate(-2deg);
+    }
+
+    .math-card small { color: var(--muted); font-weight: 750; }
+
+    .math-equation {
+      margin: 12px 0;
+      font-family: Georgia, serif;
+      font-size: clamp(27px, 4vw, 43px);
+      letter-spacing: -.04em;
+    }
+
+    .math-equation em { color: var(--blue); font-style: normal; }
+
+    .mini-progress {
+      height: 8px;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: #e9edf8;
+    }
+
+    .mini-progress span {
+      display: block;
+      width: 68%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--blue);
+    }
+
+    .art-foot {
+      display: flex;
+      justify-content: space-between;
+      color: #e2e7ff;
+      font-size: 12px;
+    }
+
+    .section { padding: 45px 0; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-kicker {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(27px, 4vw, 39px);
+      line-height: 1.1;
+      letter-spacing: -.045em;
+    }
+
+    .section-desc { max-width: 490px; margin: 8px 0 0; color: var(--muted); }
+
+    .progress-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 19px;
+      align-items: center;
+      padding: 22px 25px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+      box-shadow: 0 8px 24px #19294b08;
+    }
+
+    .progress-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--lime);
+      font-size: 22px;
+    }
+
+    .progress-title { margin: 0 0 3px; font-weight: 800; }
+    .progress-sub { margin: 0; color: var(--muted); font-size: 13px; }
+    .progress-number { color: var(--blue); font-size: 20px; font-weight: 850; }
+
+    .progress-bar {
+      height: 7px;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 7px;
+      background: #edf0f6;
+    }
+
+    .progress-bar span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--blue);
+      transition: width .3s ease;
+    }
+
+    .year-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .year-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--paper);
+      text-align: left;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .year-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .year-card.selected { border-color: var(--blue); box-shadow: 0 0 0 3px #4459dd18; }
+
+    .year-card::after {
+      content: attr(data-symbol);
+      position: absolute;
+      right: 12px;
+      bottom: -24px;
+      color: var(--tint);
+      font-size: 110px;
+      font-weight: 900;
+      line-height: 1;
+      opacity: .55;
+    }
+
+    .year-card > * { position: relative; z-index: 1; }
+
+    .year-tag {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .year-card h3 { margin: 12px 0 6px; font-size: 23px; letter-spacing: -.04em; }
+    .year-card p { max-width: 220px; margin: 0; color: var(--muted); font-size: 13px; }
+
+    .pathway-panel {
+      margin-top: 20px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: var(--paper);
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 19px;
+    }
+
+    .panel-head h3 { margin: 0; font-size: 22px; letter-spacing: -.03em; }
+    .panel-head p { margin: 5px 0 0; color: var(--muted); font-size: 14px; }
+
+    .curriculum-tag {
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: #eef7f3;
+      color: #237554;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .strand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .strand {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fbfcfe;
+    }
+
+    .strand-top { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+
+    .strand-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--tint);
+      font-size: 14px;
+    }
+
+    .strand h4 { margin: 0; font-size: 14px; }
+    .strand p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+    .senior-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+
+    .senior-card {
+      display: flex;
+      min-height: 194px;
+      flex-direction: column;
+      padding: 19px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--paper);
+    }
+
+    .senior-card .stage {
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .senior-card h3 { margin: 10px 0 7px; font-size: 17px; }
+    .senior-card p { flex: 1; margin: 0; color: var(--muted); font-size: 13px; }
+
+    .senior-card a {
+      margin-top: 15px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .feature {
+      display: flex;
+      gap: 15px;
+      padding: 20px;
+      border-radius: 16px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    .feature-icon {
+      flex: 0 0 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--tint);
+      font-size: 18px;
+    }
+
+    .feature h3 { margin: 1px 0 5px; font-size: 16px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .lesson-demo {
+      display: grid;
+      grid-template-columns: 1fr .84fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .lesson-card {
+      padding: 27px;
+      border-radius: 20px;
+      background: var(--ink);
+      color: white;
+    }
+
+    .lesson-card .section-kicker { color: #b7c4ff; }
+    .lesson-card h2 { color: white; font-size: 29px; }
+    .lesson-card p { color: #c7d0e2; }
+
+    .example {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid #ffffff20;
+      border-radius: 12px;
+      background: #ffffff0b;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .example strong { color: var(--lime); }
+
+    .quiz-card {
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--paper);
+    }
+
+    .quiz-card h3 { margin: 0 0 7px; font-size: 19px; }
+    .quiz-question { margin: 0 0 15px; color: var(--muted); font-size: 14px; }
+    .answer-list { display: grid; gap: 9px; }
+
+    .answer {
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      text-align: left;
+      color: var(--ink);
+    }
+
+    .answer:hover { border-color: var(--blue); background: #f8f9ff; }
+    .answer.correct { border-color: #61b58e; background: #ecfaf3; }
+    .answer.incorrect { border-color: #e0a093; background: #fff3ef; }
+
+    #quiz-feedback { min-height: 24px; margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+
+    .flashcard-area {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 180px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fbfcff;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .flashcard-area small {
+      color: var(--blue);
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .flashcard-area strong { margin-top: 9px; font-size: 20px; }
+    .flashcard-area span { margin-top: 8px; color: var(--muted); font-size: 13px; }
+    .flash-controls { display: flex; justify-content: space-between; gap: 8px; margin-top: 12px; }
+
+    .soft-btn {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: white;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .soft-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+    .source-note {
+      margin-top: 20px;
+      padding: 15px 17px;
+      border-radius: 12px;
+      background: #eef1ff;
+      color: #435071;
+      font-size: 12px;
+    }
+
+    .source-note a { color: #354ac2; font-weight: 750; }
+    .footer { margin-top: 45px; padding: 27px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { text-decoration: none; font-weight: 700; }
+    .notice { color: #8994a8; }
+
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr .8fr; gap: 22px; }
+      .year-grid { grid-template-columns: repeat(2, 1fr); }
+      .senior-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 28px, 540px); }
+      .nav { min-height: 66px; }
+      .nav-links { gap: 13px; font-size: 12px; }
+      .nav-links a:nth-child(2) { display: none; }
+      .nav-cta { padding: 9px 11px; }
+      .hero { padding-top: 43px; }
+      .hero-grid, .lesson-demo { grid-template-columns: 1fr; }
+      .hero-art { min-height: 280px; }
+      .math-card { top: 20%; }
+      .section { padding: 34px 0; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .progress-card { grid-template-columns: auto 1fr; padding: 17px; }
+      .progress-number { grid-column: 2; }
+      .strand-grid { grid-template-columns: 1fr 1fr; }
+      .features { grid-template-columns: 1fr; }
+      .panel-head { flex-direction: column; }
+    }
+
+    @media (max-width: 410px) {
+      .nav-links a { display: none; }
+      .year-grid, .senior-grid, .strand-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 43px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="MathsPath home">
+        <span class="brand-icon">∑</span><span>MathsPath</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#curriculum">Curriculum</a>
+        <a href="#practice">Practice</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="nav-cta" href="#curriculum">Choose a course <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="eyebrow-dot"></span> Maths for Years 7–12</span>
+          <h1>Make sense of maths. <span>Step by step.</span></h1>
+          <p class="hero-copy">A clear learning path from the foundations to senior maths. Learn a concept, try it, and build confidence one small win at a time.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#curriculum">Explore the learning path <span aria-hidden="true">→</span></a>
+            <a class="text-btn" href="#practice">Try a practice question ↓</a>
+          </div>
+          <p class="hero-note">Free to use · No account needed · Your progress stays in this browser</p>
+        </div>
+
+        <div class="hero-art" aria-label="Decorative maths learning illustration">
+          <div class="art-label">Your next learning win</div>
+          <div class="math-card">
+            <small>ALGEBRA · QUICK PRACTICE</small>
+            <div class="math-equation">3x + 5 = 20</div>
+            <small>Find the value of <em>x</em></small>
+            <div class="mini-progress"><span></span></div>
+          </div>
+          <div class="art-foot" style="position:absolute;z-index:1;left:26px;right:26px;bottom:20px">
+            <span>One concept at a time</span><span>✦</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Your progress">
+      <div class="progress-card">
+        <div class="progress-icon" aria-hidden="true">✦</div>
+        <div>
+          <p class="progress-title">Your learning progress</p>
+          <p class="progress-sub" id="progress-copy">Start a lesson to begin building your streak.</p>
+          <div class="progress-bar"><span id="progress-fill"></span></div>
+        </div>
+        <div class="progress-number"><span id="progress-count">0</span> lessons complete</div>
+      </div>
+    </section>
+
+    <section class="section" id="curriculum">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Your learning path</p>
+          <h2>Choose your year</h2>
+          <p class="section-desc">Follow the curriculum from Year 7 to Year 10, then choose a senior maths pathway that fits your goals.</p>
+        </div>
+      </div>
+      <div class="year-grid" id="year-grid"></div>
+      <div class="pathway-panel" id="pathway-panel" aria-live="polite"></div>
+    </section>
+
+    <section class="section" id="senior-pathways">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Senior years · South Australia</p>
+          <h2>Four ways to keep going</h2>
+          <p class="section-desc">SACE maths has different pathways. You can choose a practical route, a broad course, or more advanced maths for further study.</p>
+        </div>
+      </div>
+
+      <div class="senior-grid">
+        <article class="senior-card">
+          <span class="stage">Stage 1 + Stage 2</span>
+          <h3>Essential Mathematics</h3>
+          <p>Practical numeracy and problem-solving for everyday, workplace, and vocational contexts.</p>
+          <a href="https://www.sace.sa.edu.au/en-US/studying/subjects/essential-mathematics" target="_blank" rel="noreferrer">Official SACE outline ↗</a>
+        </article>
+        <article class="senior-card">
+          <span class="stage">Stage 1 + Stage 2</span>
+          <h3>General Mathematics</h3>
+          <p>Applied maths including finance, statistics, modelling, networks, and matrices.</p>
+          <a href="https://www.sace.sa.edu.au/en-US/studying/subjects/general-mathematics" target="_blank" rel="noreferrer">Official SACE outline ↗</a>
+        </article>
+        <article class="senior-card">
+          <span class="stage">Stage 1 + Stage 2</span>
+          <h3>Mathematical Methods</h3>
+          <p>Functions, calculus, and statistics for students exploring science, economics, and related study.</p>
+          <a href="https://www.sace.sa.edu.au/studying/subjects/mathematical-methods" target="_blank" rel="noreferrer">Official SACE outline ↗</a>
+        </article>
+        <article class="senior-card">
+          <span class="stage">Stage 2 · alongside Methods</span>
+          <h3>Specialist Mathematics</h3>
+          <p>Advanced topics, mathematical reasoning, and modelling for deeper study.</p>
+          <a href="https://www.sace.sa.edu.au/en-US/web/specialist-mathematics" target="_blank" rel="noreferrer">Official SACE outline ↗</a>
+        </article>
+      </div>
+
+      <div class="source-note">Senior pathways and subject requirements can change. Use the linked SACE subject outline as the official source for the current course.</div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Built for understanding</p>
+          <h2>More than a stack of flashcards</h2>
+          <p class="section-desc">A good learning path helps you understand the idea, practise it, and remember it later.</p>
+        </div>
+      </div>
+
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon" style="--tint:var(--mint)">▤</div>
+          <div><h3>Learn in a sensible order</h3><p>Move through topics that build on one another, with clear goals for each lesson.</p></div>
+        </article>
+        <article class="feature">
+          <div class="feature-icon" style="--tint:var(--peach)">✎</div>
+          <div><h3>See a worked example</h3><p>Follow the steps, notice why they work, and then try a similar problem yourself.</p></div>
+        </article>
+        <article class="feature">
+          <div class="feature-icon" style="--tint:var(--lilac)">▣</div>
+          <div><h3>Practise and review</h3><p>Use quick questions and flashcards to strengthen recall over time.</p></div>
+        </article>
+        <article class="feature">
+          <div class="feature-icon" style="--tint:var(--lime)">◷</div>
+          <div><h3>Keep track on your device</h3><p>Completed lessons are saved in this browser. No account or paid service is required.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="practice">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Try it now</p>
+          <h2>A little practice goes a long way</h2>
+          <p class="section-desc">Start with a Year 7 algebra idea. Choose an answer and get an explanation straight away.</p>
+        </div>
+      </div>
+
+      <div class="lesson-demo">
+        <article class="lesson-card">
+          <p class="section-kicker">Year 7 · Algebra</p>
+          <h2>Keep both sides balanced</h2>
+          <p>An equation is like a balanced scale. Whatever you do to one side, do the same to the other side to keep it equal.</p>
+          <div class="example">
+            <strong>Example</strong><br>
+            3x + 5 = 20<br>
+            3x = 15 &nbsp; (subtract 5)<br>
+            x = 5 &nbsp;&nbsp;&nbsp; (divide by 3)
+          </div>
+          <div class="flash-controls">
+            <button class="soft-btn" id="mark-lesson">Mark lesson complete ✓</button>
+            <button class="soft-btn" id="flash-toggle">Show a flashcard ↗</button>
+          </div>
+        </article>
+
+        <article class="quiz-card">
+          <h3>Quick check</h3>
+          <p class="quiz-question">If 2x + 4 = 14, what is x?</p>
+          <div class="answer-list" id="answer-list">
+            <button class="answer" data-correct="false">3</button>
+            <button class="answer" data-correct="true">5</button>
+            <button class="answer" data-correct="false">9</button>
+          </div>
+          <p id="quiz-feedback" role="status" aria-live="polite">Choose an answer to see how you went.</p>
+          <div class="flashcard-area" id="flashcard" hidden tabindex="0" role="button" aria-label="Flashcard, activate to flip">
+            <small id="flash-label">Flashcard · front</small>
+            <strong id="flash-front">What does it mean to solve an equation?</strong>
+            <span id="flash-back" hidden>Find the value of the unknown that makes the equation true.</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="source-note" aria-label="Curriculum sources">
+      Curriculum map based on the
+      <a href="https://www.australiancurriculum.edu.au/curriculum-information/understand-this-learning-area/mathematics" target="_blank" rel="noreferrer">Australian Curriculum: Mathematics</a>
+      and
+      <a href="https://www.sace.sa.edu.au/en-US/web/sacei/curriculum/subject-information/subject-syllabus/mathematics" target="_blank" rel="noreferrer">SACE mathematics subjects</a>.
+      Lessons on this site are original learning materials aligned to those sources; this independent study site is not endorsed by ACARA or SACE.
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div>
+        <strong>MathsPath</strong> · Learn maths step by step<br>
+        <span class="notice">A free independent learning project. Curriculum links point to official sources.</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/shi_.chris" target="_blank" rel="noreferrer" aria-label="Instagram profile">Instagram</a>
+        <a href="https://www.linkedin.com/in/christopher-shi-080497366" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const curriculum = {
+      "Year 7": {
+        label: "Build your foundations",
+        tint: "#d9f2e7",
+        symbol: "7",
+        strands: [
+          ["Number", "Integers, fractions, decimals, percentages, ratio, rates, and square roots."],
+          ["Algebra", "Variables, simplifying expressions, equations, patterns, and linear graphs."],
+          ["Measurement", "Units, perimeter, area, volume, time, and choosing suitable measures."],
+          ["Space", "Angles, shapes, coordinates, transformations, and geometric reasoning."],
+          ["Statistics", "Collecting, displaying, comparing, and describing data."],
+          ["Probability", "Chance, probability scales, and listing possible outcomes."]
+        ]
+      },
+      "Year 8": {
+        label: "Connect ideas and methods",
+        tint: "#ffe5d6",
+        symbol: "8",
+        strands: [
+          ["Number", "Rational and irrational numbers, percentages, rates, ratios, and index laws."],
+          ["Algebra", "Linear equations, substitution, graphs, and relationships between variables."],
+          ["Measurement", "Area, surface area, volume, units, and measurement error."],
+          ["Space", "Pythagoras, transformations, congruence, and properties of shapes."],
+          ["Statistics", "Distributions, data displays, comparing groups, and sampling."],
+          ["Probability", "Sample spaces, two-step chance events, and experimental probability."]
+        ]
+      },
+      "Year 9": {
+        label: "Strengthen problem-solving",
+        tint: "#e8e5ff",
+        symbol: "9",
+        strands: [
+          ["Number", "Index laws, scientific notation, rates, percentages, and real-number reasoning."],
+          ["Algebra", "Expanding and factorising, linear relations, equations, and nonlinear graphs."],
+          ["Measurement", "Scale, similarity, surface area, volume, and trigonometric measurement."],
+          ["Space", "Geometric proofs, transformations, Pythagoras, and right-angle trigonometry."],
+          ["Statistics", "Bivariate data, association, distributions, and comparing data sets."],
+          ["Probability", "Compound events, simulations, and reasoning about likelihood."]
+        ]
+      },
+      "Year 10": {
+        label: "Prepare for senior pathways",
+        tint: "#e5ecff",
+        symbol: "10",
+        strands: [
+          ["Number", "Surds, indices, scientific notation, and numerical methods."],
+          ["Algebra", "Quadratics, simultaneous equations, functions, and exponential models."],
+          ["Measurement", "Trigonometry, scale, rates of change, and geometric applications."],
+          ["Space", "Similarity, geometric reasoning, trigonometric ratios, and 3D geometry."],
+          ["Statistics", "Bivariate data, interpreting trends, and evaluating statistical claims."],
+          ["Probability", "Conditional and compound probability, simulations, and expected outcomes."]
+        ]
+      }
+    };
+
+    const icons = ["№", "ƒ", "↗", "◇", "▥", "◌"];
+    const yearGrid = document.querySelector("#year-grid");
+    const pathwayPanel = document.querySelector("#pathway-panel");
+    let activeYear = "Year 7";
+
+    function renderYears() {
+      yearGrid.innerHTML = Object.entries(curriculum).map(([year, data]) => `
+        <button class="year-card ${year === activeYear ? "selected" : ""}"
+                style="--tint:${data.tint}"
+                data-symbol="${data.symbol}"
+                data-year="${year}"
+                aria-pressed="${year === activeYear}">
+          <span class="year-tag">Australian Curriculum · Years 7–10</span>
+          <h3>${year}</h3>
+          <p>${data.label}. Explore the six maths strands.</p>
+        </button>
+      `).join("");
+
+      yearGrid.querySelectorAll("[data-year]").forEach(button => {
+        button.addEventListener("click", () => {
+          activeYear = button.dataset.year;
+          renderYears();
+          renderPathway();
+        });
+      });
+    }
+
+    function renderPathway() {
+      const data = curriculum[activeYear];
+      pathwayPanel.innerHTML = `
+        <div class="panel-head">
+          <div>
+            <h3>${activeYear} learning map</h3>
+            <p>${data.label} · Choose a strand to begin planning your course.</p>
+          </div>
+          <span class="curriculum-tag">AC v9.0 · six strands</span>
+        </div>
+        <div class="strand-grid">
+          ${data.strands.map(([name, description], index) => `
+            <article class="strand" style="--tint:${data.tint}">
+              <div class="strand-top">
+                <span class="strand-icon">${icons[index]}</span>
+                <h4>${name}</h4>
+              </div>
+              <p>${description}</p>
+            </article>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    renderYears();
+    renderPathway();
+
+    const storageKey = "mathspath-completed-lessons-v1";
+    let completed = JSON.parse(localStorage.getItem(storageKey) || "[]");
+
+    function updateProgress() {
+      const count = completed.length;
+      document.querySelector("#progress-count").textContent = count;
+      document.querySelector("#progress-copy").textContent = count
+        ? "Nice work. Keep going at your own pace."
+        : "Start a lesson to begin building your streak.";
+      document.querySelector("#progress-fill").style.width =
+        `${Math.min(count * 20, 100)}%`;
+    }
+
+    updateProgress();
+
+    document.querySelector("#mark-lesson").addEventListener("click", event => {
+      const lessonId = "year7-algebra-equations";
+
+      if (!completed.includes(lessonId)) {
+        completed.push(lessonId);
+      }
+
+      localStorage.setItem(storageKey, JSON.stringify(completed));
+      updateProgress();
+      event.currentTarget.textContent = "Lesson complete ✓";
+    });
+
+    document.querySelectorAll(".answer").forEach(button => {
+      button.addEventListener("click", () => {
+        const correct = button.dataset.correct === "true";
+
+        document.querySelectorAll(".answer").forEach(answer => {
+          answer.classList.remove("correct", "incorrect");
+        });
+
+        button.classList.add(correct ? "correct" : "incorrect");
+        document.querySelector("#quiz-feedback").textContent = correct
+          ? "Correct! Subtract 4 from both sides: 2x = 10. Then divide both sides by 2, so x = 5."
+          : "Not quite. Subtract 4 from both sides first, then divide the result by 2. Try again.";
+      });
+    });
+
+    const flashcard = document.querySelector("#flashcard");
+    const flashToggle = document.querySelector("#flash-toggle");
+    let flashIsBack = false;
+
+    function flipFlashcard() {
+      flashIsBack = !flashIsBack;
+      document.querySelector("#flash-label").textContent =
+        flashIsBack ? "Flashcard · answer" : "Flashcard · front";
+      document.querySelector("#flash-front").hidden = flashIsBack;
+      document.querySelector("#flash-back").hidden = !flashIsBack;
+    }
+
+    flashToggle.addEventListener("click", () => {
+      flashcard.hidden = !flashcard.hidden;
+
+      if (!flashcard.hidden) {
+        flashcard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    });
+
+    flashcard.addEventListener("click", flipFlashcard);
+
+    flashcard.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        flipFlashcard();
+      }
+    });
+  </script>
+</body>
+</html>
